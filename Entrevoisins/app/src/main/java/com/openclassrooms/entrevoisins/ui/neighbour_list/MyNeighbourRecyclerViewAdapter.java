@@ -63,7 +63,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 //go to details activity
                 NeighbourApiService mApiService = DI.getNeighbourApiService();
                 Intent intent = new Intent().setClass(holder.itemView.getContext(),NeighbourDetailsActivity.class);
-                intent.putExtra(EXTRA_ID, mApiService.getNeighbours().indexOf(neighbour));
+                intent.putExtra(EXTRA_ID, neighbour.getId());
                 holder.itemView.getContext().startActivity(intent);
 
             }

@@ -39,6 +39,8 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     TextView mNeighbourPhonenumber;
     @BindView(R.id.item_list_aboutme)
     TextView mNeighbourAboutme;
+    @BindView(R.id.neighbour_contact)
+    TextView mNeighbourContact;
     @BindView(R.id.addToFavorit)
     FloatingActionButton addToFavoritButton;
 
@@ -78,6 +80,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
             mNeighbourAddress.setText(mNeighbour.getAddress());
             mNeighbourPhonenumber.setText(mNeighbour.getPhoneNumber());
             mNeighbourAboutme.setText(mNeighbour.getAboutMe());
+            mNeighbourContact.setText("\"www.facebook.fr/"+mNeighbour.getName());
         }
 
     }
