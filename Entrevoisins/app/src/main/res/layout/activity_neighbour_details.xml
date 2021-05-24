@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/details"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -61,7 +62,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_star_border_white_24dp"
-        app:backgroundTint="?android:attr/detailsElementBackground"
         app:elevation="10dp"
         app:layout_anchor="@id/appBarLayout"
         app:layout_anchorGravity="bottom|end" />

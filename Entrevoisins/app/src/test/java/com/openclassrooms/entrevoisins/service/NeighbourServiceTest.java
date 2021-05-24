@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
@@ -59,7 +60,15 @@ public class NeighbourServiceTest {
 
     @Test
     public void getFavNeighbours(){
-
+        Neighbour neighbour = service.getNeighbours().get(0);
+        Neighbour neighbour1 = service.getNeighbours().get(1);
+        service.addToFavorits(neighbour);
+        service.addToFavorits(neighbour1);
+        List<Neighbour> Favneighbours = service.getfavoritNeighbours();
+        List<Neighbour> expectedFavNeighbours = new ArrayList<>();
+        expectedFavNeighbours.add(neighbour);
+        expectedFavNeighbours.add(neighbour1);
+        assertThat(Favneighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedFavNeighbours.toArray()));
     }
 
 }
