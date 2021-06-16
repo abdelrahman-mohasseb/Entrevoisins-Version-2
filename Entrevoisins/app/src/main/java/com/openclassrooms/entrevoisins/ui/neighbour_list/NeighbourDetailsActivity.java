@@ -3,8 +3,10 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +45,9 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     TextView mNeighbourContact;
     @BindView(R.id.addToFavorit)
     FloatingActionButton addToFavoritButton;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     private NeighbourApiService mApiService;
     private Neighbour mNeighbour;
@@ -57,7 +62,10 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
         ButterKnife.bind(this);
+        
+
         Intent intent = getIntent();
+
         if (intent.hasExtra(EXTRA_ID)) {
             neighbourClicked_ID = intent.getLongExtra(EXTRA_ID, -1);
         }
@@ -69,6 +77,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
             mNeighbourName2.setText(mNeighbour.getName());
 
             if(mNeighbour.getisFavorit()){
+                addToFavoritButton.setImageResource(R.drawable.ic_star_white_24dp);
                 clicked = true;
             }
             mNeighbourAddress.setText(mNeighbour.getAddress());
@@ -80,15 +89,19 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     }
     @OnClick(R.id.addToFavorit)
     void addToFavorit() {
-        if(clicked) {
+        if(!clicked) {
             addToFavoritButton.setImageResource(R.drawable.ic_star_white_24dp);
             mApiService.addToFavorits(mNeighbour);
-            clicked = false;
+            mNeighbour.setFavorit(true);
+            clicked = true;
         }
         else {
          addToFavoritButton.setImageResource(R.drawable.ic_star_border_white_24dp);
          mApiService.deleteFavorit(mNeighbour);
+         mNeighbour.setFavorit(false);
+         clicked=false;
         }
     }
+
 
 }
