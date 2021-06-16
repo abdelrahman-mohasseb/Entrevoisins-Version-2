@@ -45,11 +45,10 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     FloatingActionButton addToFavoritButton;
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours = new ArrayList<>();;
     private Neighbour mNeighbour;
     private Long neighbourClicked_ID;
     private Boolean clicked = false;
-    private Boolean found =false;
+
 
 
     @Override
@@ -57,23 +56,18 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_neighbour_details);
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
-        mNeighbours = mApiService.getNeighbours();
         ButterKnife.bind(this);
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ID)) {
             neighbourClicked_ID = intent.getLongExtra(EXTRA_ID, -1);
         }
-        if(neighbourClicked_ID != -1){
-            for(int i=0; i< mNeighbours.size(); i++){
-                if(mNeighbours.get(i).getId() == neighbourClicked_ID){
-                    mNeighbour = mNeighbours.get(i);
-                    found = true;
-                }
-                if (found) break;
-            }
+        mNeighbour = mApiService.getNeighbourById(neighbourClicked_ID);
+        if(mNeighbour != null){
+
             Glide.with(mNeighbourImage.getContext()).load(mNeighbour.getAvatarUrl()).into(mNeighbourImage);
             mNeighbourName.setText(mNeighbour.getName());
             mNeighbourName2.setText(mNeighbour.getName());
+
             if(mNeighbour.getisFavorit()){
                 clicked = true;
             }
@@ -96,14 +90,5 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
          mApiService.deleteFavorit(mNeighbour);
         }
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home : {
-                finish();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }
