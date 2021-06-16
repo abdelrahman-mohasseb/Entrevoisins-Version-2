@@ -70,7 +70,7 @@ public class NeighboursListTest {
     @Test
     public void myNeighboursList_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and click on it.
-        onView(withId(R.id.list_neighbours))
+        onView(getViewByContentDescription("layout1"))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
@@ -85,19 +85,22 @@ public class NeighboursListTest {
         onView(getViewByContentDescription("layout1"))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
-        onView(withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+        onView(getViewByContentDescription("layout1")).check(withItemCount(ITEMS_COUNT-1));
     }
+    @Test
     public void NeighboursList_clickAction_shouldShowitemDetails(){
         onView(getViewByContentDescription("layout1")).check(matches(isDisplayed()));
         onView(getViewByContentDescription("layout1")).perform(RecyclerViewActions.actionOnItemAtPosition(1,click()));
         onView(withId(R.id.details)).check(matches(isDisplayed()));
     }
+    @Test
     public void Neighbourname_shouldbefilled() {
         onView(getViewByContentDescription("layout1")).check(matches(isDisplayed()));
         onView(getViewByContentDescription("layout1")).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
         String mNeighbourname = mApiService.getNeighbours().get(0).getName();
         onView(withId(R.id.item_list_name)).check(matches(withText(mNeighbourname)));
     }
+    @Test
     public void FavoriteFragment_shouldbefilledwithfavoriteNeighbours() {
         onView(getViewByContentDescription("layout1")).check(matches(isDisplayed()));
         onView(getViewByContentDescription("layout1")).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
