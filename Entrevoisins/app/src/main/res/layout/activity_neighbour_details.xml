@@ -40,16 +40,6 @@
                 android:backgroundTint="@android:color/transparent"
                 app:navigationIcon="?attr/homeAsUpIndicator" />
 
-            <TextView
-                android:id="@+id/item_list_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left"
-                android:layout_marginLeft="12dp"
-                android:layout_marginBottom="24dp"
-                android:text="Caroline"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

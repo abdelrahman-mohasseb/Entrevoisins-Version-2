@@ -31,8 +31,6 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.item_list_avatar)
     ImageView mNeighbourImage;
-    @BindView(R.id.item_list_name)
-    TextView mNeighbourName;
     @BindView(R.id.item_list_name2)
     TextView mNeighbourName2;
     @BindView(R.id.item_list_address)
@@ -62,7 +60,8 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
         ButterKnife.bind(this);
-        
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
 
@@ -73,7 +72,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         if(mNeighbour != null){
 
             Glide.with(mNeighbourImage.getContext()).load(mNeighbour.getAvatarUrl()).into(mNeighbourImage);
-            mNeighbourName.setText(mNeighbour.getName());
+            getSupportActionBar().setTitle(mNeighbour.getName());
             mNeighbourName2.setText(mNeighbour.getName());
 
             if(mNeighbour.getisFavorit()){
